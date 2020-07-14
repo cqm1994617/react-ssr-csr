@@ -1,13 +1,19 @@
 module.exports = {
   overrides: [
     {
+      test: ["./src/common", "./src/server"],
+      "presets": [
+        [
+          "@babel/preset-env"
+        ],
+        ["@babel/preset-react"]
+      ],
+    },
+    {
       test: ["./src/client"],
       "presets": [
         [
-          "@babel/preset-env",
-          {
-            modules: false
-          }
+          "@babel/preset-env"
         ],
         ["@babel/preset-react"]
       ],
@@ -15,20 +21,10 @@ module.exports = {
         [
           "babel-plugin-styled-components",
           {
-            "ssr": false
+            "ssr": true
           }
         ]
       ]
-    },
-    {
-      test: ["./src/server"],
-      presets: [
-        [
-          "@babel/preset-env"
-        ],
-      ]
     }
-
   ]
-
 }

@@ -1,21 +1,13 @@
 import express from 'express'
+import path from 'path'
+import { render } from './render'
 
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send(
-    `
-    <html>
-      <head>
-        <title>hello</title>
-      </head>
-      <body>
-        <h1>hello</h1>
-        <p>world</p>
-      </body>
-    </html>
-  `
-  )
+app.use(express.static(path.resolve(__dirname, '../../dist')))
+
+app.get('*', (req, res) => {
+  res.send(render(req))
 })
 
 app.listen(3001, () => {
