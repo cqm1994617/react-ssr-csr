@@ -1,13 +1,11 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
   entry: ['@babel/polyfill', path.resolve(__dirname, '../src/client/index.js')],
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    // filename: 'static/js/[name].[contenthash].js'
-    filename: 'index.js'
+    filename: 'static/js/[name].[contenthash].js'
   },
   resolve: {
     alias: {
@@ -43,13 +41,7 @@ const config = {
         ],
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: '页面生成平台',
-      template: path.resolve(__dirname, '../public/index.html')
-    })
-  ]
+  }
 }
 
 module.exports = config

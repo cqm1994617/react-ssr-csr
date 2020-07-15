@@ -1,28 +1,35 @@
 import React from 'react'
+import fs from 'fs'
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import getRoutes from '../common/route'
+import getRoutes from '../route/index'
+import { Provider } from 'react-redux';
+import creator from '../store'
+import { ServerStyleSheet } from 'styled-components'
 
 export const render = (req) => {
+
+  const sheet = new ServerStyleSheet()
+  const store = creator()
+
   const content = renderToString(
-    <StaticRouter location={req.path} >
-      {getRoutes()}
-    </StaticRouter>
+    sheet.collectStyles(
+      <Provider store={store}>
+        <StaticRouter location={req.path} >
+          {getRoutes()}
+        </StaticRouter>
+      </Provider>
+    )
   )
 
-  return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>服务端渲染脚手架</title>
-    </head>
-    <body>
-      <div id="app">${content}</div>
-      <script src="/index.js"></script>
-    </body>
-    </html>
-  `
+  const styleTags = sheet.getStyleTags()
+
+  let html = fs.readFileSync('dist/index.html', 'utf-8')
+
+  html = html.replace(/<div id="app"><\/div>/g, `<div id="app">${content}</div>`)
+    .replace(/<head>/, `<head>${styleTags}`)
+
+  console.log(html)
+
+  return html
 }

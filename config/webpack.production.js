@@ -3,7 +3,9 @@ const baseConfig = require('./webpack.base')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const path = require('path')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -26,6 +28,9 @@ module.exports = merge(baseConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../public/index.html')
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({

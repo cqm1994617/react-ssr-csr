@@ -6,14 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js",
-    "dev:server": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/server/app.js",
-    "production": "cross-env NODE_ENV=production webpack --config ./config/webpack.production.js"
+    "server": "node ./dist-server/server/bundle.js",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cross-env NODE_ENV=production webpack --config ./config/webpack.production.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config ./config/webpack.server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.17.1",
+    "lodash": "^4.17.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -47,6 +50,8 @@
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
     "open-browser-webpack-plugin": "0.0.5",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
@@ -55,5 +60,11 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.0.9",
     "webpack-node-externals": "^2.5.0"
-  }
+  },
+  "sideEffects": [
+    "*.scss",
+    "*.sass",
+    "*.less",
+    "*.css"
+  ]
 }
