@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { HOME_ADD } from '../../actions/homeAction'
-import './index.css'
+import './index.scss'
 
 function Home(props) {
 
@@ -11,8 +11,6 @@ function Home(props) {
   const click = () => {
     dispatch(HOME_ADD)
   }
-
-  console.log(props)
 
   return (
     <div>
