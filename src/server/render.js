@@ -1,9 +1,9 @@
 import React from 'react'
 import fs from 'fs'
-import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
+import { renderToString } from 'react-dom/server'
+import { StaticRouter } from 'react-router-dom'
 import getRoutes from '../route/index'
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 import creator from '../store'
 import { ServerStyleSheet } from 'styled-components'
 
