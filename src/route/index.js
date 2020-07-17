@@ -6,19 +6,23 @@ import Test from '../client/pages/test'
 
 const routes = [
   {
+    key: 'index',
     component: Index,
+    getInitialProps: Index.getInitialProps,
     routes: [
       {
         path: '/',
         key: 'home',
         exact: true,
-        component: Home
+        component: Home,
+        getInitialProps: Home.getInitialProps
       },
       {
         path: '/test',
         key: 'test',
         exact: true,
-        component: Test
+        component: Test,
+        getInitialProps: Test.getInitialProps
       }
     ]
   }

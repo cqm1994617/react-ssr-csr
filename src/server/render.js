@@ -14,18 +14,15 @@ export const render = async (req) => {
   const store = creator()
 
   const matchedRoutes = matchRoutes(routes, req.path)
-  const initialPropsPromises = []
-
-  console.log(req.path)
-  console.log(matchedRoutes)
+  const promises = []
 
   matchedRoutes.forEach(item => {
     if (item.route.getInitialProps) {
-      initialPropsPromises.push(item.route.getInitialProps(store))
+      promises.push(item.route.getInitialProps(store))
     }
   })
 
-  const initialProps = await Promise.all(initialPropsPromises)
+  await Promise.all(promises)
 
   const content = renderToString(
     sheet.collectStyles(
@@ -37,12 +34,17 @@ export const render = async (req) => {
     )
   )
 
+
   const styleTags = sheet.getStyleTags()
 
   let html = fs.readFileSync('dist/index.html', 'utf-8')
 
+  const storeStr = JSON.stringify(store.getState())
+
   html = html.replace(/<div id="app"><\/div>/g,
-    `<div id="app">${content}</div>`
+    `<div id="app">${content}</div>
+      <script>window.__GLOBAL_STORE = ${storeStr}</script>
+    `
   ).replace(/<head>/, `<head>${styleTags}`)
 
   return html

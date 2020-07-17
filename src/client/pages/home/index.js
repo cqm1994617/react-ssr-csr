@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HOME_ADD } from '../../actions/homeAction'
 import './index.scss'
 
-function Home(props) {
+function Home() {
 
   const dispatch = useDispatch()
   const value = useSelector(state => state.homeReducer)
@@ -11,8 +11,6 @@ function Home(props) {
   const click = () => {
     dispatch(HOME_ADD)
   }
-
-  console.log(props.route)
 
   return (
     <div>
@@ -23,19 +21,14 @@ function Home(props) {
   )
 }
 
-Home.getInitialProps = async () => {
-  const data = await new Promise((resolve) => {
+Home.getInitialProps = async (store) => {
+  console.log('home -> getInitialProps')
+  await new Promise((resolve) => {
     setTimeout(() => {
-      resolve({
-        name: 'Jack',
-        age: 22
-      })
-    }, 500)
+      store.dispatch(HOME_ADD)
+      resolve()
+    }, 3000)
   })
-
-  return {
-    ...data
-  }
 }
 
 export default Home
