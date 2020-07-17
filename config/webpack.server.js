@@ -9,7 +9,7 @@ module.exports = merge(baseConfig, {
   mode: 'production',
   entry: path.resolve(__dirname, '../src/server/app.js'),
   output: {
-    path: path.resolve(__dirname, '../dist-server/server'),
+    path: path.resolve(__dirname, '../dist-server'),
     filename: 'bundle.js'
   },
   externals: [nodeExternals()],

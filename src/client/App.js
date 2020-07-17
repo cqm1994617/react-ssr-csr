@@ -1,8 +1,9 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import getRoute from '../route/index'
+import routes from '../route/index'
 import { Provider } from 'react-redux'
 import createor from '../store/index'
+import { renderRoutes } from 'react-router-config'
 
 const store = createor()
 
@@ -11,7 +12,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <BrowserRouter basename="/">
-          {getRoute()}
+          {renderRoutes(routes)}
         </BrowserRouter>
       </Provider>
     )

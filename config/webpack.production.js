@@ -10,7 +10,7 @@ const path = require('path')
 module.exports = merge(baseConfig, {
   mode: 'production',
   output: {
-    publicPath: '/'
+    publicPath: '/assets'
   },
   module: {
     rules: [

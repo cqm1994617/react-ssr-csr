@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './index.css'
 
-function Test(props) {
+function Test() {
 
   const [count, setCount] = useState(0)
 
@@ -14,8 +14,6 @@ function Test(props) {
     return () => clearInterval(timer)
 
   }, [])
-
-  console.log(props)
 
   return (
     <div>

@@ -12,6 +12,8 @@ function Home(props) {
     dispatch(HOME_ADD)
   }
 
+  console.log(props.route)
+
   return (
     <div>
       <h1 className="title">Home Page</h1>
@@ -19,6 +21,21 @@ function Home(props) {
       <div>{value}</div>
     </div>
   )
+}
+
+Home.getInitialProps = async () => {
+  const data = await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        name: 'Jack',
+        age: 22
+      })
+    }, 500)
+  })
+
+  return {
+    ...data
+  }
 }
 
 export default Home
