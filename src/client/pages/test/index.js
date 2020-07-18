@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import wrapper from '../../Wrapper'
 import './index.css'
 
-function Test() {
+function Test(props) {
 
   const [count, setCount] = useState(0)
 
@@ -32,4 +33,4 @@ Test.getInitialProps = async () => {
   })
 }
 
-export default Test
+export default wrapper(Test)

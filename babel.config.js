@@ -7,7 +7,8 @@ const plugins = [
     {
       "ssr": false
     }
-  ]
+  ],
+  ["@babel/plugin-proposal-class-properties"]
 ]
 
 if (server_dev) {

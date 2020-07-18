@@ -21,7 +21,7 @@ const routes = [
         path: '/test',
         key: 'test',
         exact: true,
-        component: Test,
+        render: () => <Test haha="自定义的props" />,
         getInitialProps: Test.getInitialProps
       }
     ]
