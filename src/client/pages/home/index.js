@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { HOME_ADD } from '../../actions/homeAction'
+import wrapper from '../../Wrapper'
 import './index.scss'
 
 function Home() {
@@ -22,13 +23,13 @@ function Home() {
 }
 
 Home.getInitialProps = async (store) => {
-  console.log('home -> getInitialProps')
+
   await new Promise((resolve) => {
     setTimeout(() => {
       store.dispatch(HOME_ADD)
       resolve()
-    }, 3000)
+    }, 1500)
   })
 }
 
-export default Home
+export default wrapper(Home)

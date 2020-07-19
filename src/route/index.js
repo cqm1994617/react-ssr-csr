@@ -7,6 +7,7 @@ import Test from '../client/pages/test'
 const routes = [
   {
     key: 'index',
+    path: '/',
     component: Index,
     getInitialProps: Index.getInitialProps,
     routes: [

@@ -1,11 +1,11 @@
 import express from 'express'
 import '@babel/polyfill'
-import path from 'path'
+import pathConfig from '../../path.config'
 import { render } from './render'
 
 const app = express()
 
-app.use('/assets', express.static('dist'))
+app.use(`${pathConfig.publicPath}/assets`, express.static('dist'))
 
 app.use((req, res, next) => {
   if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {

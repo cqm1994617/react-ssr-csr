@@ -3,14 +3,16 @@ const baseConfig = require('./webpack.base')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
+const pathConfig = require('../path.config')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
   output: {
-    publicPath: '/assets'
+    publicPath: pathConfig.publicPath + '/assets'
   },
   module: {
     rules: [
@@ -29,12 +31,13 @@ module.exports = merge(baseConfig, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
+    new CompressionPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html')
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "static/css/[name].[contenthash].css",
+      filename: "assets/static/css/[name].[contenthash].css",
       chunkFilename: "[id].[contenthash].css"
     }),
     // new BundleAnalyzerPlugin()

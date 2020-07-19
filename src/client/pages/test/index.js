@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import wrapper from '../../Wrapper'
 import './index.css'
 
-function Test(props) {
+function Test() {
 
   const [count, setCount] = useState(0)
 
@@ -25,7 +25,7 @@ function Test(props) {
 }
 
 Test.getInitialProps = async () => {
-  console.log('test -> getInitialProps')
+
   await new Promise((resolve) => {
     setTimeout(() => {
       resolve()

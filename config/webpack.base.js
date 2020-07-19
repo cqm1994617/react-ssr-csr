@@ -5,7 +5,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'static/js/[name].[contenthash].js'
+    filename: 'assets/static/js/[name].[contenthash].js'
   },
   resolve: {
     alias: {
@@ -35,7 +35,7 @@ const config = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'static/assets/images/[name].[hash].[ext]'
+              name: 'assets/static/assets/images/[name].[hash].[ext]'
             },
           },
         ],

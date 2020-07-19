@@ -7,13 +7,15 @@ import { Provider } from 'react-redux'
 import creator from '../store'
 import { ServerStyleSheet } from 'styled-components'
 import { matchRoutes, renderRoutes } from 'react-router-config'
+import pathConfig from '../../path.config'
 
 export const render = async (req) => {
 
   const sheet = new ServerStyleSheet()
   const store = creator()
 
-  const matchedRoutes = matchRoutes(routes, req.path)
+  const matchedRoutes = matchRoutes(routes, req.path.replace(pathConfig.publicPathReg, ''))
+
   const promises = []
 
   matchedRoutes.forEach(item => {
@@ -27,13 +29,12 @@ export const render = async (req) => {
   const content = renderToString(
     sheet.collectStyles(
       <Provider store={store}>
-        <StaticRouter location={req.path} >
+        <StaticRouter location={req.path.replace(pathConfig.publicPathReg, '')} >
           {renderRoutes(routes)}
         </StaticRouter>
       </Provider>
     )
   )
-
 
   const styleTags = sheet.getStyleTags()
 

@@ -12,7 +12,7 @@ module.exports = merge(baseConfig, {
     path: path.resolve(__dirname, '../dist-server'),
     filename: 'bundle.js'
   },
-  externals: [nodeExternals()],
+  // externals: [nodeExternals()],
   module: {
     rules: [{
       test: /\.(sa|sc|c)ss$/,
