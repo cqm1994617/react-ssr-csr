@@ -4,8 +4,7 @@ const config = {
   entry: ['@babel/polyfill', path.resolve(__dirname, '../src/client/index.js')],
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
-    filename: 'assets/static/js/[name].[contenthash].js'
+    filename: 'static/js/[name].[contenthash].js'
   },
   resolve: {
     alias: {
@@ -27,18 +26,6 @@ const config = {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
-      },
-      {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: 'assets/static/assets/images/[name].[hash].[ext]'
-            },
-          },
-        ],
       }
     ]
   }

@@ -7,7 +7,7 @@ function wrapper(Component) {
 
   const WrapComponent = connect(
     state => ({
-      isFirst: state.initReducer
+      isSSR: state.initReducer
     }),
     (dispatch) => ({
       init: () => {
@@ -19,8 +19,8 @@ function wrapper(Component) {
       canRender: false
     }
     async componentDidMount() {
-      const { isFirst, init } = this.props
-      if (isFirst) {
+      const { isSSR, init } = this.props
+      if (isSSR) {
         //初次加载时走的是服务端的getInitialProps，所以客户端不必再执行一遍getInitialProps，直接渲染出来即可
         init()
         this.setState({
@@ -31,11 +31,14 @@ function wrapper(Component) {
         this.setState({
           canRender: true
         })
+      } else {
+        this.setState({
+          canRender: true
+        })
       }
     }
 
     render() {
-      console.log(this.state.canRender)
       if (typeof window === 'undefined') {
         return <Component {...this.props} />
       }
@@ -44,7 +47,7 @@ function wrapper(Component) {
           <Component {...this.props} />
         )
       }
-      return <div>loading...</div>
+      return <div>执行getInitialProps中...</div>
     }
   })
 

@@ -7,9 +7,12 @@ const webpack = require('webpack')
 
 module.exports = merge(baseConfig, {
   mode: 'development',
+  output: {
+    publicPath: '/'
+  },
   devServer: {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, '../dist'),
     port: 9000
   },
   module: {
@@ -18,10 +21,27 @@ module.exports = merge(baseConfig, {
         test: /\.(sa|sc|c)ss$/,
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          },
           'postcss-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'static/file/images/[name].[hash].[ext]'
+            },
+          },
+        ],
       }
     ]
   },
@@ -33,6 +53,6 @@ module.exports = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html')
     }),
-    new OpenBrowserPlugin({ url: 'http://localhost:9000' })
+    new OpenBrowserPlugin({ url: 'http://localhost:9000/ssr' })
   ]
 })

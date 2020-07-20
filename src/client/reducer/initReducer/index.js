@@ -1,6 +1,6 @@
 import { IS_FIRST } from '../../actions/initAction'
 
-const INIT_STATE = true
+const INIT_STATE = typeof window === 'undefined'
 
 function initReducer(state = INIT_STATE, action) {
   switch(action.type) {

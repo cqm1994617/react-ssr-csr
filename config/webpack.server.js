@@ -3,6 +3,7 @@ const nodeExternals = require('webpack-node-externals')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const pathConfig = require('../path.config')
 
 module.exports = merge(baseConfig, {
   target: 'node',
@@ -26,6 +27,18 @@ module.exports = merge(baseConfig, {
         },
         'postcss-loader'
       ]
+    }, {
+      test: /\.(png|jpg|gif)$/i,
+      use: [
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            publicPath: pathConfig.publicPath + '/assets',
+            name: 'static/file/images/[name].[hash].[ext]'
+          },
+        },
+      ],
     }]
   },
   plugins: [

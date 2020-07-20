@@ -1,3 +1,3 @@
 export const HOME_ADD = {
-  type: "HOME_REDUCER/ADD"
+  type: "HOME_ACTION/ADD"
 }

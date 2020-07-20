@@ -20,10 +20,28 @@ module.exports = merge(baseConfig, {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          },
           'postcss-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              publicPath: pathConfig.publicPath + '/assets',
+              name: 'static/file/images/[name].[hash].[ext]'
+            },
+          },
+        ],
       }
     ]
   },
@@ -37,7 +55,7 @@ module.exports = merge(baseConfig, {
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "assets/static/css/[name].[contenthash].css",
+      filename: "static/css/[name].[contenthash].css",
       chunkFilename: "[id].[contenthash].css"
     }),
     // new BundleAnalyzerPlugin()

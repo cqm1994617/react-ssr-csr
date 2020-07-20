@@ -1,8 +1,8 @@
-import React, { Suspense } from 'react'
-import { Route, Switch, useHistory } from 'react-router-dom'
+import React from 'react'
 import Index from '../client/pages/index'
 import Home from '../client/pages/home'
-import Test from '../client/pages/test'
+import SSRList from '../client/pages/ssr-list'
+import CSRList from '../client/pages/csr-list'
 
 const routes = [
   {
@@ -19,11 +19,18 @@ const routes = [
         getInitialProps: Home.getInitialProps
       },
       {
-        path: '/test',
-        key: 'test',
+        path: '/ssr-list',
+        key: 'ssr-list',
         exact: true,
-        render: () => <Test haha="自定义的props" />,
-        getInitialProps: Test.getInitialProps
+        render: () => <SSRList title="页面_SSRList" />,
+        getInitialProps: SSRList.getInitialProps
+      },
+      {
+        path: '/csr-list',
+        key: 'csr-list',
+        exact: true,
+        render: () => <CSRList title="页面_CSRList" />,
+        getInitialProps: CSRList.getInitialProps
       }
     ]
   }
