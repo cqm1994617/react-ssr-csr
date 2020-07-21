@@ -34,7 +34,7 @@ module.exports = merge(baseConfig, {
           loader: 'url-loader',
           options: {
             limit: 8192,
-            publicPath: pathConfig.publicPath + '/assets',
+            publicPath: pathConfig.publicPath,
             name: 'static/file/images/[name].[hash].[ext]'
           },
         },

@@ -1,28 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { IS_FIRST } from './actions/initAction'
 import store from './store'
+import { isClient } from '../util'
 
 function wrapper(Component) {
 
-  const WrapComponent = connect(
-    state => ({
-      isSSR: state.initReducer
-    }),
-    (dispatch) => ({
-      init: () => {
-        dispatch(IS_FIRST)
-      }
-    })
-  )(class Wrap extends React.Component {
+  class WrapComponent extends React.Component {
     state = {
       canRender: false
     }
     async componentDidMount() {
-      const { isSSR, init } = this.props
-      if (isSSR) {
-        //初次加载时走的是服务端的getInitialProps，所以客户端不必再执行一遍getInitialProps，直接渲染出来即可
-        init()
+      if (window.__STOP_GET_INITIAL_PROPS === 1) {
         this.setState({
           canRender: true
         })
@@ -39,7 +26,7 @@ function wrapper(Component) {
     }
 
     render() {
-      if (typeof window === 'undefined') {
+      if (!isClient()) {
         return <Component {...this.props} />
       }
       if (this.state.canRender) {
@@ -49,8 +36,7 @@ function wrapper(Component) {
       }
       return <div>执行getInitialProps中...</div>
     }
-  })
-
+  }
 
   WrapComponent.getInitialProps = Component.getInitialProps
 

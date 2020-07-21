@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js",
-    "dev:server": "cross-env NODE_ENV=development SERVER_DEV=1 nodemon --exec babel-node ./src/server/app.js",
+    "dev:server": "cross-env NODE_ENV=development SERVER_DEV=1 nodemon --exec babel-node ./dist-server/bundle.js",
     "server": "node ./dist-server/bundle.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config ./config/webpack.production.js",
-    "build:server": "cross-env NODE_ENV=production webpack --config ./config/webpack.server.js"
+    "build:server": "cross-env NODE_ENV=production SERVER_DEV=1 webpack --config ./config/webpack.server.js"
   },
   "author": "",
   "license": "ISC",

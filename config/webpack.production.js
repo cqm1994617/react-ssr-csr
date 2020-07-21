@@ -12,7 +12,7 @@ const pathConfig = require('../path.config')
 module.exports = merge(baseConfig, {
   mode: 'production',
   output: {
-    publicPath: pathConfig.publicPath + '/assets'
+    publicPath: pathConfig.publicPath
   },
   module: {
     rules: [
@@ -37,7 +37,7 @@ module.exports = merge(baseConfig, {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              publicPath: pathConfig.publicPath + '/assets',
+              publicPath: pathConfig.publicPath,
               name: 'static/file/images/[name].[hash].[ext]'
             },
           },

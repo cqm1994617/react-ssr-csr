@@ -40,9 +40,8 @@ const Header = () => {
   return (
     <>
       <Image />
-      <img src={testImg} style={{width: '20%'}} />
       <HeaderContainer>
-        <div onClick={to('/')}>首页</div>
+        <div onClick={to('/home')}>首页</div>
         <div onClick={to('/ssr-list')}>SSR加载列表</div>
         <div onClick={to('/csr-list')}>CSR加载列表</div>
       </HeaderContainer>

@@ -41,10 +41,12 @@ export const render = async (req) => {
   let html = fs.readFileSync('dist/index.html', 'utf-8')
 
   const storeStr = JSON.stringify(store.getState())
+  const stopGetInitialProps = promises.length > 0 ? 1 : 0
 
   html = html.replace(/<div id="app"><\/div>/g,
     `<div id="app">${content}</div>
       <script>window.__GLOBAL_STORE = ${storeStr}</script>
+      <script>window.__STOP_GET_INITIAL_PROPS = ${stopGetInitialProps}</script>
     `
   ).replace(/<head>/, `<head>${styleTags}`)
 

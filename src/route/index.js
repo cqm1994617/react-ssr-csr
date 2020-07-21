@@ -12,7 +12,7 @@ const routes = [
     getInitialProps: Index.getInitialProps,
     routes: [
       {
-        path: '/',
+        path: '/home',
         key: 'home',
         exact: true,
         component: Home,
