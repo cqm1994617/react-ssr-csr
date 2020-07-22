@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import creator from '../store'
 import { ServerStyleSheet } from 'styled-components'
 import { matchRoutes, renderRoutes } from 'react-router-config'
+import { flushToHTML } from 'styled-jsx/server'
 import pathConfig from '../../path.config'
 
 export const render = async (req) => {
@@ -36,6 +37,8 @@ export const render = async (req) => {
     )
   )
 
+  const styles = flushToHTML()
+
   const styleTags = sheet.getStyleTags()
 
   let html = fs.readFileSync('dist/index.html', 'utf-8')
@@ -48,7 +51,7 @@ export const render = async (req) => {
       <script>window.__GLOBAL_STORE = ${storeStr}</script>
       <script>window.__STOP_GET_INITIAL_PROPS = ${stopGetInitialProps}</script>
     `
-  ).replace(/<head>/, `<head>${styleTags}`)
+  ).replace(/<head>/, `<head>${styleTags} \n ${styles}`)
 
   return html
 }
