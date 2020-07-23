@@ -27,7 +27,7 @@ function SSRList() {
 
 SSRList.getInitialProps = async (store) => {
   const list = await getSSRList()
-  console.log(list)
+
   store.dispatch({
     type: SET_LIST.type,
     payload: list

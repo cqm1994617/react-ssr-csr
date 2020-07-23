@@ -1,5 +1,4 @@
 const env = process.env.NODE_ENV
-const server_dev = process.env.SERVER_DEV === '1'
 
 const plugins = [
   [
@@ -7,17 +6,6 @@ const plugins = [
   ],
   ["@babel/plugin-proposal-class-properties"]
 ]
-
-// if (server_dev) {
-//   plugins.push(
-//     [
-//       "babel-plugin-transform-require-ignore",
-//       {
-//         "extensions": [".css", ".less", ".sass", "scss", ".jpg", ".png", ".gif"]
-//       }
-//     ]
-//   )
-// }
 
 module.exports = {
   "presets": [
