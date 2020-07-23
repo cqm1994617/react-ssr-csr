@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js",
+    "ssr": "cross-env NODE_ENV=development webpack --watch --config ./config/webpack.server.js",
+    "nodemon": "nodemon ./dist/server.js",
     "server": "node ./dist/server.js",
     "production": "pm2 ./dist/server.js",
+    "dev": "concurrently \"npm start\" \"npm run ssr\" \"npm run nodemon\"",
     "build": "npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config ./config/webpack.production.js",
     "build:server": "cross-env NODE_ENV=production webpack --config ./config/webpack.server.js"
@@ -51,6 +54,7 @@
     "file-loader": "^6.0.0",
     "glob": "^7.1.6",
     "html-webpack-plugin": "^4.3.0",
+    "http-proxy-middleware": "^1.0.5",
     "isomorphic-style-loader": "^5.1.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",

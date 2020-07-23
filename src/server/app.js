@@ -3,8 +3,16 @@ import '@babel/polyfill'
 import pathConfig from '../../path.config'
 import { render } from './render'
 import fs from 'fs'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
 const app = express()
+
+if (process.env.NODE_ENV === 'development') {
+  app.use('/', createProxyMiddleware({
+    target: 'http://localhost:9000',
+    changeOrigin: true
+  }))
+}
 
 app.use(pathConfig.publicPath + '/static', express.static('dist/static'))
 

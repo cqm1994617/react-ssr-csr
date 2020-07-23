@@ -10,9 +10,14 @@ module.exports = merge(baseConfig, {
   entry: path.resolve(__dirname, '../src/server/app.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'server.js'
+    filename: 'server.js',
+    libraryTarget: 'commonjs2'
   },
-  externals: [nodeExternals()],
+  externals: [
+    nodeExternals({
+      whitelist: /\.(css|less|sass|scss)$/
+    })
+  ],
   module: {
     rules: [{
       test: /\.(sa|sc|c)ss$/,
