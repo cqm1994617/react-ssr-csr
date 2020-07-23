@@ -2,16 +2,15 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const pathConfig = require('../path.config')
 
 module.exports = merge(baseConfig, {
   target: 'node',
-  mode: 'production',
+  mode: 'development',
   entry: path.resolve(__dirname, '../src/server/app.js'),
   output: {
-    path: path.resolve(__dirname, '../dist-server'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'server.js'
   },
   externals: [nodeExternals()],
   module: {
@@ -40,8 +39,5 @@ module.exports = merge(baseConfig, {
         },
       ],
     }]
-  },
-  plugins: [
-    new CleanWebpackPlugin()
-  ]
+  }
 })
