@@ -3,6 +3,7 @@ import Index from '../client/pages/index'
 import Home from '../client/pages/home'
 import SSRList from '../client/pages/ssr-list'
 import CSRList from '../client/pages/csr-list'
+import StyleTest from '../client/pages/style-test'
 
 const routes = [
   {
@@ -15,7 +16,7 @@ const routes = [
         path: '/home',
         key: 'home',
         exact: true,
-        component: Home,
+        render: () => <Home title="页面_Home" />,
         getInitialProps: Home.getInitialProps
       },
       {
@@ -31,6 +32,13 @@ const routes = [
         exact: true,
         render: () => <CSRList title="页面_CSRList" />,
         getInitialProps: CSRList.getInitialProps
+      },
+      {
+        path: '/style-test',
+        key: 'style-test',
+        exact: true,
+        render: () => <StyleTest title="页面_StyleTest" />,
+        getInitialProps: StyleTest.getInitialProps
       }
     ]
   }

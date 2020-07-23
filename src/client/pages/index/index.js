@@ -44,6 +44,7 @@ const Header = () => {
         <div onClick={to('/home')}>首页</div>
         <div onClick={to('/ssr-list')}>SSR加载列表</div>
         <div onClick={to('/csr-list')}>CSR加载列表</div>
+        <div onClick={to('/style-test')}>样式对比测试</div>
       </HeaderContainer>
     </>
   )

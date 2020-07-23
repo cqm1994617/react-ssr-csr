@@ -4,6 +4,7 @@ const plugins = [
   [
     "babel-plugin-styled-components"
   ],
+  ["styled-jsx/babel"],
   ["@babel/plugin-proposal-class-properties"]
 ]
 
