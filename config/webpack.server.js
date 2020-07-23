@@ -6,7 +6,7 @@ const pathConfig = require('../path.config')
 
 module.exports = merge(baseConfig, {
   target: 'node',
-  mode: 'development',
+  mode: 'production',
   entry: path.resolve(__dirname, '../src/server/app.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -15,7 +15,7 @@ module.exports = merge(baseConfig, {
   },
   externals: [
     nodeExternals({
-      whitelist: /\.(css|less|sass|scss)$/
+      allowlist: /\.(css|less|sass|scss)$/
     })
   ],
   module: {
