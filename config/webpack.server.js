@@ -6,7 +6,7 @@ const pathConfig = require('../path.config')
 
 module.exports = merge(baseConfig, {
   target: 'node',
-  mode: 'production',
+  mode: process.env.NODE_ENV,
   entry: path.resolve(__dirname, '../src/server/app.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),

@@ -7,6 +7,9 @@ import { createProxyMiddleware } from 'http-proxy-middleware'
 
 const app = express()
 
+console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+console.log(process.env.NODE_ENV)
+
 if (process.env.NODE_ENV === 'development') {
   app.use('/', createProxyMiddleware({
     target: 'http://localhost:9000',
