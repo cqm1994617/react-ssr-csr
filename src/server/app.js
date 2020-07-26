@@ -26,10 +26,8 @@ app.use((req, res, next) => {
 app.get('*', async (req, res) => {
   if (req.query._mode !== 'csr') {
     await render(req, res)
-    // res.send(html)
   } else {
     let html = fs.readFileSync('dist/index.html', 'utf-8')
-    console.log(html)
     res.send(html)
   }
 })
