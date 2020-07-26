@@ -52,6 +52,6 @@ module.exports = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html')
     }),
-    new OpenBrowserPlugin({ url: 'http://localhost:9000/ssr' })
+    new OpenBrowserPlugin({ url: 'http://localhost:3001/ssr' })
   ]
 })

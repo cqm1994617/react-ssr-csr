@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HOME_ADD } from '../../actions/homeAction'
 import wrapper from '../../Wrapper'
 import style from './index.scss'
+import ListItem from './components/ListItem'
 
 function Home() {
 
@@ -18,6 +19,7 @@ function Home() {
       <h1 className={style.title}>Home Page</h1>
       <button onClick={click}>+1</button>
       <div>{value}</div>
+      <ListItem />
     </div>
   )
 }
