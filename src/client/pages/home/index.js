@@ -15,7 +15,7 @@ function Home() {
 
   return (
     <div>
-      <h1 className={style.title}>Home Page</h1>
+      <h1 className={style.title}>Home P231age</h1>
       <button onClick={click}>+1</button>
       <div>{value}</div>
     </div>

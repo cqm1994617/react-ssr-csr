@@ -46,9 +46,6 @@ module.exports = merge(baseConfig, {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
-    }),
     new CompressionPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html')
