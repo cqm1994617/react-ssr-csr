@@ -1,6 +1,7 @@
 const path = require('path')
 
 const config = {
+  mode: process.env.NODE_ENV,
   entry: ['@babel/polyfill', path.resolve(__dirname, '../src/client/index.js')],
   output: {
     path: path.resolve(__dirname, '../dist'),

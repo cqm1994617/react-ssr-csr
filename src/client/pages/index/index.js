@@ -60,7 +60,7 @@ function Index(props) {
 }
 
 Index.getInitialProps = async () => {
-  console.log('Index -> getInitialProps')
+  // console.log('Index -> getInitialProps')
 }
 
 export default Index

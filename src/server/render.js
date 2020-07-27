@@ -1,20 +1,27 @@
 import React from 'react'
 import fs from 'fs'
-import { renderToString } from 'react-dom/server'
+import { renderToNodeStream } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import routes from '../route/index'
 import { Provider } from 'react-redux'
 import creator from '../store'
 import { ServerStyleSheet } from 'styled-components'
 import { matchRoutes, renderRoutes } from 'react-router-config'
-import { flushToHTML } from 'styled-jsx/server'
 import pathConfig from '../../path.config'
+import request from 'request'
 
-export const render = async (req) => {
+async function getHTML(url) {
+  return new Promise(resolve => {
+    request(url, (err, res, body) => {
+      resolve(body)
+    })
+  })
+}
+
+export const render = async (req, res) => {
 
   const sheet = new ServerStyleSheet()
   const store = creator()
-
   const matchedRoutes = matchRoutes(routes, req.path.replace(pathConfig.publicPathReg, ''))
 
   const promises = []
@@ -27,31 +34,39 @@ export const render = async (req) => {
 
   await Promise.all(promises)
 
-  const content = renderToString(
-    sheet.collectStyles(
-      <Provider store={store}>
-        <StaticRouter location={req.path.replace(pathConfig.publicPathReg, '')} >
-          {renderRoutes(routes)}
-        </StaticRouter>
-      </Provider>
-    )
+  let html = ''
+
+  if (process.env.NODE_ENV === 'development') {
+    html = await getHTML('http://localhost:9000')
+  } else {
+    html = fs.readFileSync('dist/index.html', 'utf-8')
+  }
+
+  const jsx = sheet.collectStyles(
+    <Provider store={store}>
+      <StaticRouter location={req.path.replace(pathConfig.publicPathReg, '')} >
+        {renderRoutes(routes)}
+      </StaticRouter>
+    </Provider>
+  )
+  const stream = sheet.interleaveWithNodeStream(
+    renderToNodeStream(jsx)
   )
 
-  const styles = flushToHTML()
-
-  const styleTags = sheet.getStyleTags()
-
-  let html = fs.readFileSync('dist/index.html', 'utf-8')
+  const htmlBefore = (html.split('<body>')[0] + '<body><div id="app">')
 
   const storeStr = JSON.stringify(store.getState())
   const stopGetInitialProps = promises.length > 0 ? 1 : 0
 
-  html = html.replace(/<div id="app"><\/div>/g,
-    `<div id="app">${content}</div>
-      <script>window.__GLOBAL_STORE = ${storeStr}</script>
-      <script>window.__STOP_GET_INITIAL_PROPS = ${stopGetInitialProps}</script>
-    `
-  ).replace(/<head>/, `<head>${styleTags} \n ${styles}`)
+  const htmlAfter = (
+    `</div>
+    <script>window.__GLOBAL_STORE = ${storeStr}</script>
+    <script>window.__STOP_GET_INITIAL_PROPS = ${stopGetInitialProps}</script>` + html.split('<div id="app"></div>')[1]
+  )
 
-  return html
+  res.write(htmlBefore)
+
+  stream.pipe(res, { end: false })
+  stream.on('end', () => res.end(htmlAfter))
+
 }

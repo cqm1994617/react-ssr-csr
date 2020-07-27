@@ -8,13 +8,13 @@ import { createProxyMiddleware } from 'http-proxy-middleware'
 const app = express()
 
 if (process.env.NODE_ENV === 'development') {
-  app.use('/', createProxyMiddleware({
+  app.use('/static', createProxyMiddleware({
     target: 'http://localhost:9000',
     changeOrigin: true
   }))
+} else {
+  app.use(pathConfig.publicPath + '/static', express.static('dist/static'))
 }
-
-app.use(pathConfig.publicPath + '/static', express.static('dist/static'))
 
 app.use((req, res, next) => {
   if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
@@ -25,8 +25,7 @@ app.use((req, res, next) => {
 
 app.get('*', async (req, res) => {
   if (req.query._mode !== 'csr') {
-    const html = await render(req)
-    res.send(html)
+    await render(req, res)
   } else {
     let html = fs.readFileSync('dist/index.html', 'utf-8')
     res.send(html)

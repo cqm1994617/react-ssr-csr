@@ -6,18 +6,18 @@ const pathConfig = require('../path.config')
 
 module.exports = merge(baseConfig, {
   target: 'node',
-  mode: 'production',
+  mode: process.env.NODE_ENV,
   entry: path.resolve(__dirname, '../src/server/app.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'server.js',
     libraryTarget: 'commonjs2'
   },
-  externals: [
-    nodeExternals({
-      allowlist: /\.(css|less|sass|scss)$/
-    })
-  ],
+  // externals: [
+  //   nodeExternals({
+  //     allowlist: /\.(css|less|sass|scss)$/
+  //   })
+  // ],
   module: {
     rules: [{
       test: /\.(sa|sc|c)ss$/,
@@ -38,7 +38,7 @@ module.exports = merge(baseConfig, {
           loader: 'url-loader',
           options: {
             limit: 8192,
-            publicPath: pathConfig.publicPath,
+            publicPath: process.env.NODE_ENV === 'production' ? pathConfig.publicPath : '/',
             name: 'static/file/images/[name].[hash].[ext]'
           },
         },
