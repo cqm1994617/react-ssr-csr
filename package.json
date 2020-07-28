@@ -10,7 +10,7 @@
     "server": "node ./dist/server.js",
     "production": "pm2 ./dist/server.js",
     "dev": "concurrently \"npm start\" \"npm run ssr\" \"npm run nodemon\"",
-    "build": "npm run build:client && npm run build:server",
+    "build": "cross-env NODE_ENV=production npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config ./config/webpack.production.js",
     "build:server": "cross-env NODE_ENV=production webpack --config ./config/webpack.server.js"
   },
