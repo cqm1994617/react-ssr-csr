@@ -20,6 +20,22 @@ function Home() {
       <button onClick={click}>+1</button>
       <div>{value}</div>
       <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
     </div>
   )
 }

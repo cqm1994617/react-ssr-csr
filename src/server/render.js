@@ -55,7 +55,7 @@ export const render = async (req, res) => {
   const stream = sheet.interleaveWithNodeStream(
     renderToNodeStream(jsx)
   )
-  console.log(html)
+
   const htmlBefore = html.split('<body>')[0] + '<body><div id="app">'
 
 
@@ -69,5 +69,6 @@ export const render = async (req, res) => {
 
   stream.pipe(res, { end: false })
   stream.on('end', () => res.end(htmlAfter))
+  stream.on('error', () => res.end('error'))
 
 }
