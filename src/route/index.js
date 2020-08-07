@@ -5,6 +5,7 @@ import SSRList from '../client/pages/ssr-list'
 import CSRList from '../client/pages/csr-list'
 import StyleTest from '../client/pages/style-test'
 
+
 const routes = [
   {
     key: 'index',
