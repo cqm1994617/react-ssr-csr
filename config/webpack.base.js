@@ -1,5 +1,4 @@
 const path = require('path')
-const LoadablePlugin = require('@loadable/webpack-plugin')
 
 const config = {
   mode: process.env.NODE_ENV,
@@ -30,10 +29,7 @@ const config = {
         }
       }
     ]
-  },
-  plugins: [
-    new LoadablePlugin()
-  ]
+  }
 }
 
 module.exports = config

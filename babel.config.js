@@ -5,8 +5,7 @@ const plugins = [
     "babel-plugin-styled-components"
   ],
   ["styled-jsx/babel"],
-  ["@babel/plugin-proposal-class-properties"],
-  ["@loadable/babel-plugin"]
+  ["@babel/plugin-proposal-class-properties"]
 ]
 
 module.exports = {
