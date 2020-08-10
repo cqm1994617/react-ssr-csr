@@ -53,7 +53,7 @@ export const render = async (req, res) => {
     renderToNodeStream(jsx)
   )
 
-  const htmlBefore = (html.split('<body>')[0] + '<body><div id="app">')
+  const htmlBefore = html.split('<body>')[0] + '<body><div id="app">'
 
   const storeStr = JSON.stringify(store.getState())
   const stopGetInitialProps = promises.length > 0 ? 1 : 0
@@ -68,5 +68,6 @@ export const render = async (req, res) => {
 
   stream.pipe(res, { end: false })
   stream.on('end', () => res.end(htmlAfter))
+  stream.on('error', () => res.end('error'))
 
 }

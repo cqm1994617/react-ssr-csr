@@ -2,8 +2,10 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { HOME_ADD } from '../../actions/homeAction'
 import wrapper from '../../Wrapper'
-import style from './index.scss'
+import './index.scss'
 import ListItem from './components/ListItem'
+import { Button } from 'antd'
+import 'antd/dist/antd.min.css'
 
 function Home() {
 
@@ -16,9 +18,26 @@ function Home() {
 
   return (
     <div>
-      <h1 className={style.title}>Home Page</h1>
+      <h1 className="h-title">Home Page</h1>
       <button onClick={click}>+1</button>
       <div>{value}</div>
+      <Button type="primary">124</Button>
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
       <ListItem />
     </div>
   )

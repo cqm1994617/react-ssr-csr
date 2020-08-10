@@ -23,7 +23,9 @@ module.exports = merge(baseConfig, {
           {
             loader: 'css-loader',
             options: {
-              modules: true
+              modules: {
+                auto: true
+              }
             }
           },
           'postcss-loader',
