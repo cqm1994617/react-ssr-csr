@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HOME_ADD } from '../../actions/homeAction'
 import wrapper from '../../Wrapper'
 import './index.scss'
+import style from './test.module.scss'
 import ListItem from './components/ListItem'
 import { Button } from 'antd'
 import 'antd/dist/antd.min.css'
@@ -19,6 +20,7 @@ function Home() {
   return (
     <div>
       <h1 className="h-title">Home Page</h1>
+      <h1 className={style.test}>MODULE</h1>
       <button onClick={click}>+1</button>
       <div>{value}</div>
       <Button type="primary">124</Button>

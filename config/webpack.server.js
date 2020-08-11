@@ -13,36 +13,43 @@ module.exports = merge(baseConfig, {
     filename: 'server.js',
     libraryTarget: 'commonjs2'
   },
-  // externals: [
-  //   nodeExternals({
-  //     allowlist: /\.(css|less|sass|scss)$/
-  //   })
-  // ],
+  externals: [
+    nodeExternals({
+      allowlist: /\.(css|less|sass|scss)$/
+    })
+  ],
   module: {
-    rules: [{
-      test: /\.(sa|sc|c)ss$/,
-      use: [
-        'isomorphic-style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1
-          }
-        },
-        'postcss-loader'
-      ]
-    }, {
-      test: /\.(png|jpg|gif)$/i,
-      use: [
-        {
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            publicPath: process.env.NODE_ENV === 'production' ? pathConfig.publicPath : '/',
-            name: 'static/file/images/[name].[hash].[ext]'
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
           },
-        },
-      ],
-    }]
+          'postcss-loader'
+        ]
+      },
+      // {
+      //   test: /\.(sa|sc|c)ss$/,
+      //   use: ['ignore-loader']
+      // },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              publicPath: process.env.NODE_ENV === 'production' ? pathConfig.publicPath : '/',
+              name: 'static/file/images/[name].[hash].[ext]'
+            },
+          },
+        ],
+      }
+    ]
   }
 })
